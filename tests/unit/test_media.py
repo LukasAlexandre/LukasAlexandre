@@ -69,10 +69,11 @@ class MediaTests(unittest.TestCase):
         self.assertTrue((ROOT / 'assets/portrait/source.jpg').exists())
         for private_source_pattern in ('*.ts', '*.glsl', '*.js', '.env*'):
             self.assertFalse(list((ROOT / 'generated').rglob(private_source_pattern)))
-        self.assertFalse(list((ROOT / 'generated').rglob('project-ethan*.svg')))
+        self.assertFalse(list((ROOT / 'generated/dark').glob('project-ethan*.svg')))
+        self.assertFalse(list((ROOT / 'generated/light').glob('project-ethan*.svg')))
         self.assertIn('type="image/webp"', readme())
         self.assertIn('project-ethan.gif', readme())
-        self.assertIn('project-ethan-static.png', readme())
+        self.assertIn('adaptive/project-ethan-static.svg', readme())
 
 
 if __name__ == '__main__':

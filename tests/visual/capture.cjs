@@ -16,12 +16,12 @@ const sizes = [[1920,1080],[1440,900],[1280,720],[768,1024],[390,844],[375,812]]
   const report = {testedAt:new Date().toISOString(),base,platform:'Local Chromium; GitHub remote platform not tested',results:[],animation:[],reducedMotion:[],failures:[]};
   try {
     for (const theme of ['dark','light']) for (const [width,height] of sizes) {
-      const context = await browser.newContext({viewport:{width,height},colorScheme:theme,deviceScaleFactor:1});
+      const context = await browser.newContext({viewport:{width,height},colorScheme:theme==='dark'?'light':'dark',deviceScaleFactor:1});
       const page = await context.newPage();
       const errors=[];
       page.on('pageerror',error => errors.push(error.message));
       page.on('response',response => { if(response.status()>=400) errors.push(`${response.status()} ${response.url()}`); });
-      await page.goto(`${base}?theme=${theme}`,{waitUntil:'networkidle'});
+      await page.goto(`${base}?theme=${theme}&mode=parity`,{waitUntil:'networkidle'});
       await page.waitForFunction(() => window.previewReady || window.previewError);
       assert.equal(await page.evaluate(() => window.previewError || null),null);
       await page.locator('#readme img').evaluateAll(async imgs => { await Promise.all(imgs.map(img=>img.decode())); });
@@ -42,7 +42,7 @@ const sizes = [[1920,1080],[1440,900],[1280,720],[768,1024],[390,844],[375,812]]
         return {
           pageWidth:document.documentElement.scrollWidth,viewport:innerWidth,
           articleWidth:box.width,articleScrollWidth:article.scrollWidth,
-          images:[...article.querySelectorAll('img')].map(img=>({src:new URL(img.currentSrc).pathname,alt:img.alt,left:img.getBoundingClientRect().left,top:img.getBoundingClientRect().top,width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height,naturalWidth:img.naturalWidth,complete:img.complete})),
+          images:[...article.querySelectorAll('img')].map(img=>({src:new URL(img.currentSrc).pathname,alt:img.alt,left:img.getBoundingClientRect().left,top:img.getBoundingClientRect().top,width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,complete:img.complete})),
           theme:document.documentElement.dataset.colorMode,
           transferredBytes:performance.getEntriesByType('resource').reduce((sum,item)=>sum+item.transferSize,0),
           domContentLoadedMs:performance.getEntriesByType('navigation')[0].domContentLoadedEventEnd,
@@ -53,7 +53,10 @@ const sizes = [[1920,1080],[1440,900],[1280,720],[768,1024],[390,844],[375,812]]
       if(layout.pageWidth>width) report.failures.push(`${theme}/${width}: page overflow ${layout.pageWidth}`);
       if(layout.articleScrollWidth>Math.ceil(layout.articleWidth)+1) report.failures.push(`${theme}/${width}: README overflow`);
       if(layout.images.some(img=>!img.complete || !img.naturalWidth || !img.alt)) report.failures.push(`${theme}/${width}: broken or inaccessible image`);
-      if(layout.images.some(img=>!img.src.includes(`/generated/${theme}/`))) report.failures.push(`${theme}/${width}: mismatched asset theme`);
+      if(layout.images.some(img=>!img.src.includes(`/generated/${theme}/`) && !img.src.includes('/generated/adaptive/'))) report.failures.push(`${theme}/${width}: mismatched asset theme`);
+      const hero=layout.images[0];
+      if(width>600 && (hero.src.includes('mobile') || Math.abs(hero.width/hero.height-720/304)>.015 || hero.height>360)) report.failures.push(`${theme}/${width}: desktop hero selection/ratio/height`);
+      if(width<=600 && !hero.src.endsWith('/hero-mobile.svg')) report.failures.push(`${theme}/${width}: mobile hero missing`);
       const projects=layout.images.filter(img=>img.src.includes('/project-'));
       if(projects.length!==5 || Math.abs(projects[0].top-projects[1].top)>1 || projects.slice(2).some(img=>Math.abs(img.top-projects[2].top)>1) || projects[0].width<projects[2].width*1.45) report.failures.push(`${theme}/${width}: Bento row structure or featured emphasis mismatch`);
       if(errors.length) report.failures.push(...errors);

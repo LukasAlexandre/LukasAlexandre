@@ -9,25 +9,31 @@ from common import ROOT, THEMES, esc, load_json, safe_url
 
 
 def picture(name: str, alt: str, width: str = "100%", mobile: bool = False, *, raster: bool = False) -> str:
-    if raster:
-        markup = picture(name, alt, width, mobile)
-        import re
-        markup = re.sub(r'([A-Za-z0-9/-]+)\.svg', lambda m: m[1] + ('.png' if m[1].endswith('-static') else '.gif'), markup)
-        markup = re.sub(r'<source media="([^"]+)" srcset="([^"]+)\.gif">',
-                        lambda m: f'<source media="{m[1]}" type="image/webp" srcset="{m[2]}.webp">' + m[0], markup)
-        return markup.replace('<img ', f'<source media="(prefers-color-scheme: dark)" type="image/webp" srcset="./generated/dark/{name}.webp"><img ', 1)
     sources = []
+    def source(media, file, kind=""):
+        sources.append(f'<source media="{media}"{kind} srcset="./generated/{file}">')
+    # Never combine theme with width/motion: GitHub replaces the ENTIRE media
+    # expression of theme sources when the reader manually selects a theme.
     if mobile:
-        for theme in THEMES:
-            sources.append(f'<source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: {theme}) and (max-width: 600px)" srcset="./generated/{theme}/{name}-mobile-static.svg">')
-    for theme in THEMES:
-        sources.append(f'<source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: {theme})" srcset="./generated/{theme}/{name}-static.svg">')
+        source('(prefers-reduced-motion: reduce) and (max-width: 600px)', f'adaptive/{name}-mobile-static.svg')
+    source('(prefers-reduced-motion: reduce)', f'adaptive/{name}-static.svg')
     if mobile:
+        if raster:
+            source('(max-width: 600px)', f'adaptive/{name}-mobile-webp.svg', ' type="image/webp"')
+            source('(max-width: 600px)', f'adaptive/{name}-mobile-gif.svg')
+        else:
+            source('(max-width: 600px)', f'adaptive/{name}-mobile.svg')
+    if raster:
         for theme in THEMES:
-            sources.append(f'<source media="(prefers-color-scheme: {theme}) and (max-width: 600px)" srcset="./generated/{theme}/{name}-mobile.svg">')
-    sources.append(f'<source media="(prefers-color-scheme: light)" srcset="./generated/light/{name}.svg">')
+            source(f'(prefers-color-scheme: {theme})', f'{theme}/{name}.webp', ' type="image/webp"')
+            source(f'(prefers-color-scheme: {theme})', f'{theme}/{name}.gif')
+        fallback = f'dark/{name}.gif'
+    else:
+        for theme in THEMES:
+            source(f'(prefers-color-scheme: {theme})', f'{theme}/{name}.svg')
+        fallback = f'dark/{name}.svg'
     return ('<picture>' + ''.join(sources) +
-            f'<img src="./generated/dark/{name}.svg" alt="{esc(alt)}" width="{width}"></picture>')
+            f'<img src="./generated/{fallback}" alt="{esc(alt)}" width="{width}"></picture>')
 
 
 def readme() -> str:
@@ -68,17 +74,30 @@ def readme() -> str:
 
 
 def validate_generated() -> None:
-    for theme in THEMES:
+    for theme in (*THEMES, "adaptive"):
         for path in sorted((ROOT / "generated" / theme).glob("*.svg")):
             node = ET.parse(path).getroot()
             if node.tag != '{http://www.w3.org/2000/svg}svg':
                 raise ValueError(f"Not an SVG: {path}")
             for element in node.iter():
                 tag = element.tag.rsplit('}', 1)[-1]
-                if tag in {"script", "foreignObject", "image"}:
+                raster_wrapper = theme == "adaptive" and path.name.startswith("project-ethan")
+                if tag == "image" and raster_wrapper:
+                    import base64
+                    import re
+                    href = element.get('href', '')
+                    match = re.fullmatch(r'data:image/(webp|gif|png);base64,([A-Za-z0-9+/=]+)', href)
+                    if not match or element.get('class') not in THEMES:
+                        raise ValueError(f"Invalid embedded raster: {path}")
+                    ext, encoded = match.groups()
+                    stem = path.stem.removesuffix('-webp').removesuffix('-gif')
+                    source = ROOT / 'generated' / element.get('class') / (stem + '.' + ext)
+                    if base64.b64decode(encoded, validate=True) != source.read_bytes():
+                        raise ValueError(f"Raster differs from original export: {path}")
+                if tag in {"script", "foreignObject"} or (tag == "image" and not raster_wrapper):
                     raise ValueError(f"Disallowed SVG element {tag}: {path}")
                 for key, val in element.attrib.items():
-                    if key.lower().startswith('on') or ('href' in key and not val.startswith('#')):
+                    if key.lower().startswith('on') or ('href' in key and not val.startswith('#') and not (tag == 'image' and raster_wrapper and key == 'href')):
                         raise ValueError(f"External/active SVG content: {path}")
 
 
@@ -93,6 +112,7 @@ def main() -> None:
             print('WARNING: collection unavailable; preserved the last validated contribution cache.')
     for module in ('render_hero', 'render_activity', 'render_ecosystem', 'render_stack', 'render_connections'):
         __import__(module).render()
+    __import__("render_adaptive").render()
     validate_generated()
     markup = readme()
     (ROOT / 'README.md').write_text(markup, encoding='utf-8', newline='\n')

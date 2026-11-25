@@ -1,0 +1,659 @@
+{
+  "baseline": "c6f6bbff41f9177748be4075adb0033190c37751",
+  "rootCause": {
+    "before": {
+      "html": "<picture><source media=\"(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark) and (max-width: 600px)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile-static.svg\"><source media=\"(prefers-reduced-motion: reduce) and (prefers-color-scheme: light) and (max-width: 600px)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-mobile-static.svg\"><source media=\"(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-static.svg\"><source media=\"(prefers-reduced-motion: reduce) and (prefers-color-scheme: light)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-static.svg\"><source media=\"(prefers-color-scheme: dark) and (max-width: 600px)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile.svg\"><source media=\"(prefers-color-scheme: light) and (max-width: 600px)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-mobile.svg\"><source media=\"(prefers-color-scheme: light)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero.svg\"><img src=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero.svg\" alt=\"Lukas Alexandre Rosa — Product &amp; Software Engineering. Professional identity and engineering mission.\" width=\"100%\" style=\"visibility: visible; max-width: 100%;\"></picture>",
+      "current": "https://github.com/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero.svg"
+    },
+    "after": {
+      "html": "<picture><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile-static.svg\" class=\"source-dark\"><source media=\"not all\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-mobile-static.svg\" class=\"source-light\"><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-static.svg\" class=\"source-dark\"><source media=\"not all\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-static.svg\" class=\"source-light\"><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile.svg\" class=\"source-dark\"><source media=\"not all\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-mobile.svg\" class=\"source-light\"><source media=\"not all\" srcset=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero.svg\" class=\"source-light\"><img src=\"/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero.svg\" alt=\"Lukas Alexandre Rosa — Product &amp; Software Engineering. Professional identity and engineering mission.\" width=\"100%\" style=\"visibility: visible; max-width: 100%;\"></picture>",
+      "current": "https://github.com/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile-static.svg",
+      "w": 360,
+      "h": 406
+    }
+  },
+  "cacheHeaders": [
+    {
+      "requestedUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero.svg",
+      "finalUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero.svg",
+      "status": 200,
+      "bytes": 25099,
+      "sha256": "98d04b63e28f1c7f1df89b962fc66aec2e90113f20ad3dac1be81554198784ab",
+      "headers": {
+        "Content-Length": "25099",
+        "Cache-Control": "max-age=300",
+        "Content-Type": "image/svg+xml",
+        "ETag": "\"70ba22b92cccf5a80cd1156e2fdd14f39ec954aab3e9e6db899e34634ea8b7c9\"",
+        "X-GitHub-Request-Id": "5FF0:20667D:A6BDEC:AB1EF2:6B067944",
+        "Date": "Wed, 25 Nov 2026 05:59:34 GMT",
+        "X-Cache": "MISS"
+      }
+    },
+    {
+      "requestedUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero.svg?parity-audit=1795586374299049000",
+      "finalUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero.svg?parity-audit=1795586374299049000",
+      "status": 200,
+      "bytes": 25099,
+      "sha256": "98d04b63e28f1c7f1df89b962fc66aec2e90113f20ad3dac1be81554198784ab",
+      "headers": {
+        "Content-Length": "25099",
+        "Cache-Control": "max-age=300",
+        "Content-Type": "image/svg+xml",
+        "ETag": "\"70ba22b92cccf5a80cd1156e2fdd14f39ec954aab3e9e6db899e34634ea8b7c9\"",
+        "X-GitHub-Request-Id": "5FF0:20667D:A6BDEC:AB1EF2:6B067944",
+        "Date": "Wed, 25 Nov 2026 05:59:34 GMT",
+        "X-Cache": "HIT"
+      }
+    },
+    {
+      "requestedUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero-mobile-static.svg",
+      "finalUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero-mobile-static.svg",
+      "status": 200,
+      "bytes": 24688,
+      "sha256": "25a5f67ba79e8b0ddf39815c4de325015c571f3ae3409f019a8475a811833ee4",
+      "headers": {
+        "Content-Length": "24688",
+        "Cache-Control": "max-age=300",
+        "Content-Type": "image/svg+xml",
+        "ETag": "\"6a33d699d399ab928a75d547b058299f589f88d6dd74fa2320325b9b48636152\"",
+        "X-GitHub-Request-Id": "0EF6:301F13:A35722:A7B92B:6B067945",
+        "Date": "Wed, 25 Nov 2026 05:59:34 GMT",
+        "X-Cache": "MISS"
+      }
+    },
+    {
+      "requestedUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero-mobile-static.svg?parity-audit=1795586374747382300",
+      "finalUrl": "https://raw.githubusercontent.com/LukasAlexandre/LukasAlexandre/main/generated/dark/hero-mobile-static.svg?parity-audit=1795586374747382300",
+      "status": 200,
+      "bytes": 24688,
+      "sha256": "25a5f67ba79e8b0ddf39815c4de325015c571f3ae3409f019a8475a811833ee4",
+      "headers": {
+        "Content-Length": "24688",
+        "Cache-Control": "max-age=300",
+        "Content-Type": "image/svg+xml",
+        "ETag": "\"6a33d699d399ab928a75d547b058299f589f88d6dd74fa2320325b9b48636152\"",
+        "X-GitHub-Request-Id": "0EF6:301F13:A35722:A7B92B:6B067945",
+        "Date": "Wed, 25 Nov 2026 05:59:34 GMT",
+        "X-Cache": "HIT"
+      }
+    }
+  ],
+  "tests": {
+    "unit": 34,
+    "capture": {
+      "screenshots": 12,
+      "svgChecks": 48,
+      "failures": []
+    },
+    "reduced": [
+      {
+        "theme": "dark",
+        "width": 375,
+        "assets": [
+          "/generated/adaptive/hero-mobile-static.svg",
+          "/generated/adaptive/activity-mobile-static.svg",
+          "/generated/adaptive/ecosystem-header-mobile-static.svg",
+          "/generated/adaptive/project-ethan-mobile-static.svg",
+          "/generated/adaptive/project-vorcen-mobile-static.svg",
+          "/generated/adaptive/project-gidace-mobile-static.svg",
+          "/generated/adaptive/project-inoryx-mobile-static.svg",
+          "/generated/adaptive/project-vaultify-mobile-static.svg",
+          "/generated/adaptive/stack-mobile-static.svg",
+          "/generated/adaptive/connections-header-mobile-static.svg",
+          "/generated/adaptive/connection-linkedin-static.svg",
+          "/generated/adaptive/connection-github-static.svg",
+          "/generated/adaptive/connection-website-static.svg",
+          "/generated/adaptive/connection-company-static.svg",
+          "/generated/adaptive/footer-mobile-static.svg"
+        ],
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "width": 1440,
+        "assets": [
+          "/generated/adaptive/hero-static.svg",
+          "/generated/adaptive/activity-static.svg",
+          "/generated/adaptive/ecosystem-header-static.svg",
+          "/generated/adaptive/project-ethan-static.svg",
+          "/generated/adaptive/project-vorcen-static.svg",
+          "/generated/adaptive/project-gidace-static.svg",
+          "/generated/adaptive/project-inoryx-static.svg",
+          "/generated/adaptive/project-vaultify-static.svg",
+          "/generated/adaptive/stack-static.svg",
+          "/generated/adaptive/connections-header-static.svg",
+          "/generated/adaptive/connection-linkedin-static.svg",
+          "/generated/adaptive/connection-github-static.svg",
+          "/generated/adaptive/connection-website-static.svg",
+          "/generated/adaptive/connection-company-static.svg",
+          "/generated/adaptive/footer-static.svg"
+        ],
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "width": 375,
+        "assets": [
+          "/generated/adaptive/hero-mobile-static.svg",
+          "/generated/adaptive/activity-mobile-static.svg",
+          "/generated/adaptive/ecosystem-header-mobile-static.svg",
+          "/generated/adaptive/project-ethan-mobile-static.svg",
+          "/generated/adaptive/project-vorcen-mobile-static.svg",
+          "/generated/adaptive/project-gidace-mobile-static.svg",
+          "/generated/adaptive/project-inoryx-mobile-static.svg",
+          "/generated/adaptive/project-vaultify-mobile-static.svg",
+          "/generated/adaptive/stack-mobile-static.svg",
+          "/generated/adaptive/connections-header-mobile-static.svg",
+          "/generated/adaptive/connection-linkedin-static.svg",
+          "/generated/adaptive/connection-github-static.svg",
+          "/generated/adaptive/connection-website-static.svg",
+          "/generated/adaptive/connection-company-static.svg",
+          "/generated/adaptive/footer-mobile-static.svg"
+        ],
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "width": 1440,
+        "assets": [
+          "/generated/adaptive/hero-static.svg",
+          "/generated/adaptive/activity-static.svg",
+          "/generated/adaptive/ecosystem-header-static.svg",
+          "/generated/adaptive/project-ethan-static.svg",
+          "/generated/adaptive/project-vorcen-static.svg",
+          "/generated/adaptive/project-gidace-static.svg",
+          "/generated/adaptive/project-inoryx-static.svg",
+          "/generated/adaptive/project-vaultify-static.svg",
+          "/generated/adaptive/stack-static.svg",
+          "/generated/adaptive/connections-header-static.svg",
+          "/generated/adaptive/connection-linkedin-static.svg",
+          "/generated/adaptive/connection-github-static.svg",
+          "/generated/adaptive/connection-website-static.svg",
+          "/generated/adaptive/connection-company-static.svg",
+          "/generated/adaptive/footer-static.svg"
+        ],
+        "passed": true
+      }
+    ],
+    "gifFallback": [
+      {
+        "theme": "dark",
+        "width": 375,
+        "primary": {
+          "src": "http://localhost:8765/generated/adaptive/project-ethan-mobile-webp.svg",
+          "width": 174,
+          "height": 204
+        },
+        "fallback": {
+          "src": "http://localhost:8765/generated/adaptive/project-ethan-mobile-gif.svg",
+          "complete": true,
+          "width": 174,
+          "height": 204
+        },
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "width": 1440,
+        "primary": {
+          "src": "http://localhost:8765/generated/dark/project-ethan.webp",
+          "width": 352,
+          "height": 238
+        },
+        "fallback": {
+          "src": "http://localhost:8765/generated/dark/project-ethan.gif",
+          "complete": true,
+          "width": 352,
+          "height": 238
+        },
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "width": 375,
+        "primary": {
+          "src": "http://localhost:8765/generated/adaptive/project-ethan-mobile-webp.svg",
+          "width": 174,
+          "height": 204
+        },
+        "fallback": {
+          "src": "http://localhost:8765/generated/adaptive/project-ethan-mobile-gif.svg",
+          "complete": true,
+          "width": 174,
+          "height": 204
+        },
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "width": 1440,
+        "primary": {
+          "src": "http://localhost:8765/generated/light/project-ethan.webp",
+          "width": 352,
+          "height": 238
+        },
+        "fallback": {
+          "src": "http://localhost:8765/generated/light/project-ethan.gif",
+          "complete": true,
+          "width": 352,
+          "height": 238
+        },
+        "passed": true
+      }
+    ],
+    "themePixels": [
+      {
+        "theme": "dark",
+        "mobile": false,
+        "name": "hero",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "mobile": false,
+        "name": "activity",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "mobile": false,
+        "name": "project-ethan",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "mobile": true,
+        "name": "hero",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "mobile": true,
+        "name": "activity",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "mobile": true,
+        "name": "project-ethan",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "mobile": false,
+        "name": "hero",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "mobile": false,
+        "name": "activity",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "mobile": false,
+        "name": "project-ethan",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "mobile": true,
+        "name": "hero",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "mobile": true,
+        "name": "activity",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "mobile": true,
+        "name": "project-ethan",
+        "meanAbsoluteChannelError": 0,
+        "passed": true
+      }
+    ],
+    "motion": {
+      "context": "SVG loaded in img; screenshots 4s apart",
+      "results": [
+        {
+          "width": 375,
+          "asset": "hero",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 29321,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "activity",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 93664,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "project-vorcen",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 4250,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "project-ethan",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 2608,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "hero",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "activity",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "project-vorcen",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 375,
+          "asset": "project-ethan",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "hero",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 70624,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "activity",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 84301,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "project-vorcen",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 20875,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "project-ethan",
+          "reducedMotion": false,
+          "staticSelected": false,
+          "changedPixels": 15395,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "hero",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "activity",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "project-vorcen",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        },
+        {
+          "width": 900,
+          "asset": "project-ethan",
+          "reducedMotion": true,
+          "staticSelected": true,
+          "changedPixels": 0,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "actualGithubRuntimeLocalAssets": {
+    "notice": "Actual public GitHub DOM and themed-picture runtime; corrected assets intercepted locally, NOT published.",
+    "results": [
+      {
+        "theme": "dark",
+        "width": 375,
+        "before": {
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile-static.svg",
+          "width": 360,
+          "height": 406,
+          "box": {
+            "x": 41,
+            "y": 723,
+            "width": 293,
+            "height": 330.4375,
+            "top": 723,
+            "right": 334,
+            "bottom": 1053.4375,
+            "left": 41
+          }
+        },
+        "afterHero": {
+          "html": "<picture><source media=\"(prefers-reduced-motion: reduce) and (max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile-static.svg\"><source media=\"(prefers-reduced-motion: reduce)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-static.svg\"><source media=\"(max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile.svg\"><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" class=\"source-dark\"><source media=\"not all\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/light/hero.svg\" class=\"source-light\"><img src=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" alt=\"Lukas Alexandre Rosa — Product &amp; Software Engineering. Professional identity and engineering mission.\" width=\"100%\" style=\"visibility: visible; max-width: 100%;\"></picture>",
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile.svg",
+          "width": 360,
+          "height": 406,
+          "box": {
+            "x": 41,
+            "y": 723,
+            "width": 293,
+            "height": 330.4375,
+            "top": 723,
+            "right": 334,
+            "bottom": 1053.4375,
+            "left": 41
+          }
+        },
+        "viewport": {
+          "width": 375,
+          "dpr": 1,
+          "scale": 1,
+          "colorMode": "dark",
+          "colorScheme": "dark",
+          "systemDark": false,
+          "reduced": false,
+          "overflow": false
+        },
+        "passed": true
+      },
+      {
+        "theme": "dark",
+        "width": 1440,
+        "before": {
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/main/generated/dark/hero-mobile-static.svg",
+          "width": 360,
+          "height": 406,
+          "box": {
+            "x": 457,
+            "y": 224,
+            "width": 846,
+            "height": 954.09375,
+            "top": 224,
+            "right": 1303,
+            "bottom": 1178.09375,
+            "left": 457
+          }
+        },
+        "afterHero": {
+          "html": "<picture><source media=\"(prefers-reduced-motion: reduce) and (max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile-static.svg\"><source media=\"(prefers-reduced-motion: reduce)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-static.svg\"><source media=\"(max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile.svg\"><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" class=\"source-dark\"><source media=\"not all\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/light/hero.svg\" class=\"source-light\"><img src=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" alt=\"Lukas Alexandre Rosa — Product &amp; Software Engineering. Professional identity and engineering mission.\" width=\"100%\" style=\"visibility: visible; max-width: 100%;\"></picture>",
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg",
+          "width": 832,
+          "height": 351,
+          "box": {
+            "x": 457,
+            "y": 224,
+            "width": 846,
+            "height": 357.1875,
+            "top": 224,
+            "right": 1303,
+            "bottom": 581.1875,
+            "left": 457
+          }
+        },
+        "viewport": {
+          "width": 1440,
+          "dpr": 1,
+          "scale": 1,
+          "colorMode": "dark",
+          "colorScheme": "dark",
+          "systemDark": false,
+          "reduced": false,
+          "overflow": false
+        },
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "width": 375,
+        "before": {
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-mobile-static.svg",
+          "width": 360,
+          "height": 406,
+          "box": {
+            "x": 41,
+            "y": 723,
+            "width": 293,
+            "height": 330.4375,
+            "top": 723,
+            "right": 334,
+            "bottom": 1053.4375,
+            "left": 41
+          }
+        },
+        "afterHero": {
+          "html": "<picture><source media=\"(prefers-reduced-motion: reduce) and (max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile-static.svg\"><source media=\"(prefers-reduced-motion: reduce)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-static.svg\"><source media=\"(max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile.svg\"><source media=\"not all\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" class=\"source-dark\"><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/light/hero.svg\" class=\"source-light\"><img src=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" alt=\"Lukas Alexandre Rosa — Product &amp; Software Engineering. Professional identity and engineering mission.\" width=\"100%\" style=\"visibility: visible; max-width: 100%;\"></picture>",
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile.svg",
+          "width": 360,
+          "height": 406,
+          "box": {
+            "x": 41,
+            "y": 723,
+            "width": 293,
+            "height": 330.4375,
+            "top": 723,
+            "right": 334,
+            "bottom": 1053.4375,
+            "left": 41
+          }
+        },
+        "viewport": {
+          "width": 375,
+          "dpr": 1,
+          "scale": 1,
+          "colorMode": "light",
+          "colorScheme": "light",
+          "systemDark": true,
+          "reduced": false,
+          "overflow": false
+        },
+        "passed": true
+      },
+      {
+        "theme": "light",
+        "width": 1440,
+        "before": {
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/main/generated/light/hero-mobile-static.svg",
+          "width": 360,
+          "height": 406,
+          "box": {
+            "x": 457,
+            "y": 224,
+            "width": 846,
+            "height": 954.09375,
+            "top": 224,
+            "right": 1303,
+            "bottom": 1178.09375,
+            "left": 457
+          }
+        },
+        "afterHero": {
+          "html": "<picture><source media=\"(prefers-reduced-motion: reduce) and (max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile-static.svg\"><source media=\"(prefers-reduced-motion: reduce)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-static.svg\"><source media=\"(max-width: 600px)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/adaptive/hero-mobile.svg\"><source media=\"not all\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" class=\"source-dark\"><source media=\"(prefers-color-scheme: light),(prefers-color-scheme: dark)\" srcset=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/light/hero.svg\" class=\"source-light\"><img src=\"https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/dark/hero.svg\" alt=\"Lukas Alexandre Rosa — Product &amp; Software Engineering. Professional identity and engineering mission.\" width=\"100%\" style=\"visibility: visible; max-width: 100%;\"></picture>",
+          "src": "https://github.com/LukasAlexandre/LukasAlexandre/raw/parity-local/generated/light/hero.svg",
+          "width": 832,
+          "height": 351,
+          "box": {
+            "x": 457,
+            "y": 224,
+            "width": 846,
+            "height": 357.1875,
+            "top": 224,
+            "right": 1303,
+            "bottom": 581.1875,
+            "left": 457
+          }
+        },
+        "viewport": {
+          "width": 1440,
+          "dpr": 1,
+          "scale": 1,
+          "colorMode": "light",
+          "colorScheme": "light",
+          "systemDark": true,
+          "reduced": false,
+          "overflow": false
+        },
+        "passed": true
+      }
+    ]
+  },
+  "deterministicFiles": 161,
+  "limitations": [
+    "No V1.3 merge or profile publication",
+    "Local interception is not server-side sanitizer validation",
+    "Chromium only; authenticated settings untouched"
+  ]
+}
