@@ -4,9 +4,10 @@
       "id": "ethan",
       "name": "ETHAN",
       "description": "Artificial Intelligence Ecosystem.",
-      "graphic": "neural",
+      "graphic": "original-render",
       "public": true,
-      "url": null
+      "url": null,
+      "media": "original-render"
     },
     {
       "id": "vorcen",

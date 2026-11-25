@@ -12,7 +12,7 @@ const output=path.resolve(process.argv[2]||'tests/visual/evidence');
       await page.goto(`http://localhost:8765/preview/?theme=${theme}`,{waitUntil:'networkidle'});
       await page.waitForFunction(()=>window.previewReady);
       const assets=await page.locator('#readme img').evaluateAll(imgs=>imgs.map(img=>new URL(img.currentSrc).pathname));
-      results.push({theme,width,assets,passed:assets.length>0&&assets.every(src=>src.includes(`/generated/${theme}/`)&&src.endsWith('-static.svg'))&&assets.some(src=>src.endsWith(width<600?'/hero-mobile-static.svg':'/hero-static.svg'))});
+      results.push({theme,width,assets,passed:assets.length>0&&assets.every(src=>src.includes(`/generated/${theme}/`)&&/-static\.(svg|png)$/.test(src))&&assets.some(src=>src.endsWith(width<600?'/hero-mobile-static.svg':'/hero-static.svg'))});
       await context.close();
     }
   }finally{await browser.close();}

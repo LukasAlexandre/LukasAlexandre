@@ -1,64 +1,8 @@
-"""Section 01: ASCII portrait, identity block and the typed code window."""
+"""Identity and animated code: full-width, portrait-free professional hero."""
 from __future__ import annotations
-
-from common import LAYOUT, MOTION, ROOT, THEMES, Svg, esc, load_json, num, text_width
+from common import LAYOUT, MOTION, THEMES, TOKENS, Svg, esc, load_json, num, text_width
 from icons import icon
-
-# Glyph -> tone class. ':' is reserved for the removed background.
-TONES = {":": "pb", ".": "p1", "-": "p1", "=": "p2", "+": "p2", "*": "p3", "#": "p4", "%": "p4", "@": "p4"}
-# The portrait window stays graphite in both themes: light glyphs need a dark ground.
-PORTRAIT_INK = {"pb": "#454A53", "p1": "#6B707A", "p2": "#9A9EA6", "p3": "#C9CBD0", "p4": "#F4F4F5"}
 KEYWORDS = ("const",)
-
-
-def portrait_lines() -> list[str]:
-    path = ROOT / load_json("config/profile.json")["portrait"]["output"]
-    return path.read_text(encoding="utf-8").splitlines()
-
-
-def portrait(svg: Svg, x: float, y: float, w: float, h: float) -> None:
-    lines = portrait_lines()
-    cols, rows = len(lines[0]), len(lines)
-    pad = 5
-    cfg = load_json("config/profile.json")["portrait"]
-    left, top, right, bottom = cfg["crop"]
-    aspect = (right - left) / (bottom - top)
-    grid_w = min(w - pad * 2, (h - pad * 2) * aspect)
-    grid_h = grid_w / aspect
-    grid_x, grid_y = x + (w - grid_w) / 2, y + (h - grid_h) / 2
-    cell_w, cell_h = grid_w / cols, grid_h / rows
-    size = cell_h * 1.08
-    step = MOTION["portraitRow"]
-
-    svg.add(svg.rect(x, y, w, h, 12, "#07080A", "border"))
-    svg.defs.append(f'<clipPath id="pc">{svg.rect(x, y, w, h, 12, "#000")}</clipPath>')
-    svg.css.append("".join(f".{k}{{fill:{v}}}" for k, v in PORTRAIT_INK.items()))
-    svg.css.append(
-        ".row{animation:wipe .5s steps(28) both}"
-        "@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}"
-        f".cur{{opacity:0;animation:scan {num(rows * step + .5)}s steps({rows}) both}}"
-        f"@keyframes scan{{0%{{opacity:1;transform:translateY(0)}}99%{{opacity:1}}100%{{opacity:0;transform:translateY({num(rows * cell_h)}px)}}}}"
-    )
-    out = ['<g clip-path="url(#pc)" aria-hidden="true">']
-    for r, line in enumerate(lines):
-        spans, run, current = [], "", None
-        for ch in line:
-            tone = TONES.get(ch, current or "p1")  # spaces join the current run
-            if tone != current and run:
-                spans.append((current, run))
-                run = ""
-            current, run = tone, run + ch
-        spans.append((current, run))
-        svg.use_font(line, 700, "mono")
-        body = "".join(f'<tspan class="{tone}">{esc(chunk)}</tspan>' for tone, chunk in spans)
-        out.append(
-            f'<text class="mono row" xml:space="preserve" x="{num(grid_x)}" y="{num(grid_y + (r + .82) * cell_h)}" '
-            f'font-size="{num(size)}" font-weight="700" textLength="{num(cols * cell_w)}" lengthAdjust="spacingAndGlyphs" '
-            f'style="animation-delay:{num(r * step)}s;white-space:pre">{body}</text>'
-        )
-    out.append(svg.rect(grid_x + grid_w - 8, grid_y, 5, cell_h * 1.6, 0, "goldLight", extra='class="cur"'))
-    out.append("</g>")
-    svg.add("".join(out))
 
 
 def badges(svg: Svg, brand: dict, x: float, y: float, right: float, size: float) -> None:
@@ -159,63 +103,55 @@ def code_window(svg: Svg, code: list[str], x: float, y: float, w: float, h: floa
 
 def desktop(theme: str, profile: dict) -> Svg:
     top = LAYOUT["sectionHeader"]
-    svg = Svg(720, top + 332, theme, f"{profile['name']} — {profile['role']}",
+    height = TOKENS['hero']['desktopPanelHeight']
+    svg = Svg(720, top + height, theme, f"{profile['name']} — {profile['role']}",
               f"{profile['name']}. {profile['role']}. {', '.join(profile['focusLine'])}. "
-              f"{profile['company']['prefix']}{profile['company']['name']}. ASCII portrait and code snippet.",
+              f"{profile['company']['prefix']}{profile['company']['name']}. Engineering identity and code snippet.",
               display_width=LAYOUT["displayWidth"])
     svg.section_header("01", "IDENTITY", "LKR — ENGINEERING INTELLIGENCE")
-    svg.add(svg.panel(0, top, 719, 331, 10))
-    portrait(svg, 14, top + 10, 243, 311)
-
-    badges(svg, profile["brand"], 285, top + 18, 701, 7.4)
-    svg.add(svg.group(svg.text(284, top + 77, profile["name"], 30, weight=700, spacing=-.2), delay=.35))
-    svg.add(svg.group(svg.text(285, top + 100, profile["role"], 11.6, weight=700, fill="gold", spacing=2.5), delay=.45))
-    svg.add(svg.group(svg.text(285, top + 121.5, "  ·  ".join(profile["focusLine"]), 11.6, fill="text"), delay=.55))
-    company = profile["company"]
-    svg.add(svg.group(
-        icon("layers", 284, top + 132, 19, svg.c["gold"])
-        + svg.text(318, top + 146, company["prefix"] + company["name"], 11.6, fill="textSoft"),
-        delay=.65,
-    ))
-    code_window(svg, profile["code"], 285, top + 163, 417, 153, 8.6, wave=True)
-    svg.add(svg.sheen(1, top + 1, 717, 329, 10, 3))
+    svg.add(svg.panel(0, top, 720, height, 10))
+    badges(svg, profile["brand"], 22, top + 18, 698, 7.4)
+    svg.add(svg.line(354, top + 62, 354, top + 256))
+    svg.add(svg.group(svg.text(22, top + 100, profile["name"], 29, weight=700, spacing=-.4), delay=.35))
+    svg.add(svg.group(svg.text(23, top + 125, profile["role"], 10.5, weight=700, fill="gold", spacing=1.65), delay=.45))
+    focus=profile["focusLine"]
+    svg.add(svg.group(svg.text(23, top + 153, "  ·  ".join(focus[:2]), 10.8)
+                      + svg.text(23, top + 170, focus[2], 10.8), delay=.55))
+    company=profile["company"]
+    svg.add(svg.group(icon("layers",22,top+192,18,svg.c["gold"])
+                      +svg.text(49,top+205,company["prefix"]+company["name"],10.7,fill="textSoft"),delay=.65))
+    svg.add(svg.text(23,top+250,"ENGINEERING INTELLIGENT SYSTEMS.",8.4,family="mono",fill="goldLight",spacing=.5))
+    code_window(svg,profile["code"],373,top+62,325,194,9.2,wave=True)
+    svg.add(svg.sheen(1,top+1,718,276,10,3))
     return svg
 
 
 def mobile(theme: str, profile: dict) -> Svg:
-    top = LAYOUT["sectionHeader"]
-    portrait_w, portrait_h = 332, 425
-    y = top + 14 + portrait_h
-    height = y + 346
-    svg = Svg(360, height, theme, f"{profile['name']} — {profile['role']}",
-              f"{profile['name']}. {profile['role']}. ASCII portrait and code snippet.")
-    svg.section_header("01", "IDENTITY", "LKR")
-    svg.add(svg.panel(0, top, 360, height - top, 10))
-    portrait(svg, 14, top + 14, portrait_w, portrait_h)
-    badges(svg, profile["brand"], 14, y + 14, 346, 6.6)
-    svg.add(svg.group(svg.text(14, y + 68, profile["name"], 27, weight=700, spacing=-.3), delay=.35))
-    svg.add(svg.group(svg.text(14, y + 91, profile["role"], 11, weight=700, fill="gold", spacing=1.6), delay=.45))
-    focus = profile["focusLine"]
-    svg.add(svg.group(
-        svg.text(14, y + 112, "  ·  ".join(focus[:2]), 11.5)
-        + svg.text(14, y + 128, "  ·  ".join(focus[2:]), 11.5),
-        delay=.55,
-    ))
-    company = profile["company"]
-    svg.add(svg.group(
-        icon("layers", 13, y + 139, 18, svg.c["gold"])
-        + svg.text(40, y + 152, company["prefix"] + company["name"], 11.5, fill="textSoft"),
-        delay=.65,
-    ))
-    code_window(svg, profile["code"], 14, y + 170, 332, 162, 8.8, wave=False)
+    top=LAYOUT["sectionHeader"]
+    height=TOKENS['hero']['mobilePanelHeight']
+    svg=Svg(360,top+height,theme,f"{profile['name']} — {profile['role']}",
+            f"{profile['name']}. {profile['role']}. Professional identity and engineering code.")
+    svg.section_header("01","IDENTITY","LKR")
+    svg.add(svg.panel(0,top,360,height,10))
+    badges(svg,profile["brand"],14,top+16,346,6.6)
+    svg.add(svg.group(svg.text(14,top+70,profile["name"],27,weight=700,spacing=-.3),delay=.35))
+    svg.add(svg.group(svg.text(14,top+94,profile["role"],11,weight=700,fill="gold",spacing=1.6),delay=.45))
+    focus=profile["focusLine"]
+    svg.add(svg.group(svg.text(14,top+118,"  ·  ".join(focus[:2]),11.5)
+                      +svg.text(14,top+135,focus[2],11.5),delay=.55))
+    company=profile["company"]
+    svg.add(svg.group(icon("layers",13,top+150,18,svg.c["gold"])
+                      +svg.text(40,top+163,company["prefix"]+company["name"],11.5,fill="textSoft"),delay=.65))
+    code_window(svg,profile["code"],14,top+184,332,182,8.8,wave=True)
+    svg.add(svg.sheen(1,top+1,358,378,10,3))
     return svg
 
 
 def render() -> None:
-    profile = load_json("config/profile.json")
+    profile=load_json("config/profile.json")
     for theme in THEMES:
-        desktop(theme, profile).save("hero")
-        mobile(theme, profile).save("hero-mobile")
+        desktop(theme,profile).save("hero")
+        mobile(theme,profile).save("hero-mobile")
 
 
 if __name__ == "__main__":

@@ -20,12 +20,13 @@ function difference(a,b){
     for(const reduced of [false,true]){
       const context=await browser.newContext({viewport:{width:900,height:900},reducedMotion:reduced?'reduce':'no-preference'});
       const page=await context.newPage();
-      for(const name of ['hero','activity','project-vorcen']){
+      for(const name of ['hero','activity','project-vorcen','project-ethan']){
         await page.goto('http://localhost:8765/preview/?theme=dark',{waitUntil:'networkidle'});
         await page.waitForFunction(()=>window.previewReady);
         // Select the real README <picture>/<img>, including its reduced-motion
         // source selection. Mobile is tested separately by the capture harness.
-        const markup=await page.locator(`#readme img[src$="/${name}.svg"]`).evaluate(img=>img.parentElement.outerHTML);
+        const extension=name==='project-ethan'?'gif':'svg';
+        const markup=await page.locator(`#readme img[src$="/${name}.${extension}"]`).evaluate(img=>img.parentElement.outerHTML);
         // Isolate this exact picture so offscreen throttling and loading the
         // preceding README sections cannot consume its one-shot animation.
         await page.setContent(`<body style="margin:0;background:#0d1117">${markup}</body>`);
@@ -41,7 +42,7 @@ function difference(a,b){
           await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
           await img.decode();
         });
-        const staticSelected=await image.evaluate(img=>new URL(img.currentSrc).pathname.endsWith('-static.svg'));
+        const staticSelected=await image.evaluate(img=>/-static\.(svg|png)$/.test(new URL(img.currentSrc).pathname));
         await page.waitForTimeout(100);
         const first=await image.screenshot({animations:'allow'});
         await page.waitForTimeout(4000);

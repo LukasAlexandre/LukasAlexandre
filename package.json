@@ -5,7 +5,8 @@
   "scripts": {
     "test:visual": "node tests/visual/capture.cjs",
     "test:motion": "node tests/visual/animation.cjs",
-    "test:reduced": "node tests/visual/reduced-selection.cjs"
+    "test:reduced": "node tests/visual/reduced-selection.cjs",
+    "test:media": "node tests/visual/media-fallback.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",

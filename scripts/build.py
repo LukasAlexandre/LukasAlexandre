@@ -8,7 +8,14 @@ import xml.etree.ElementTree as ET
 from common import ROOT, THEMES, esc, load_json, safe_url
 
 
-def picture(name: str, alt: str, width: str = "100%", mobile: bool = False) -> str:
+def picture(name: str, alt: str, width: str = "100%", mobile: bool = False, *, raster: bool = False) -> str:
+    if raster:
+        markup = picture(name, alt, width, mobile)
+        import re
+        markup = re.sub(r'([A-Za-z0-9/-]+)\.svg', lambda m: m[1] + ('.png' if m[1].endswith('-static') else '.gif'), markup)
+        markup = re.sub(r'<source media="([^"]+)" srcset="([^"]+)\.gif">',
+                        lambda m: f'<source media="{m[1]}" type="image/webp" srcset="{m[2]}.webp">' + m[0], markup)
+        return markup.replace('<img ', f'<source media="(prefers-color-scheme: dark)" type="image/webp" srcset="./generated/dark/{name}.webp"><img ', 1)
     sources = []
     if mobile:
         for theme in THEMES:
@@ -25,7 +32,7 @@ def picture(name: str, alt: str, width: str = "100%", mobile: bool = False) -> s
 
 def readme() -> str:
     profile = load_json("config/profile.json")
-    sections = [picture("hero", profile["name"] + " — Product & Software Engineering. ASCII portrait, professional identity and engineering mission.", mobile=True),
+    sections = [picture("hero", profile["name"] + " — Product & Software Engineering. Professional identity and engineering mission.", mobile=True),
                 picture("activity", "Development Activity: real contribution totals, active days, current and longest streaks, last twelve months heatmap and monthly bars.", mobile=True),
                 picture("ecosystem-header", "Engineering Ecosystem", mobile=True)]
     config = load_json("config/projects.json")
@@ -42,7 +49,7 @@ def readme() -> str:
         width = '49%' if len(visible) == 2 else ('32%' if len(visible) == 3 else '100%')
         cards = []
         for project in visible:
-            card = picture('project-' + project['id'], project['name'] + ' — ' + project.get('description', ''), width, mobile=True)
+            card = picture('project-' + project['id'], project['name'] + ' — ' + project.get('description', ''), width, mobile=True, raster=project.get('media') == 'original-render')
             # Links require an explicit verified marker, not merely an address.
             url = safe_url(project.get('url')) if project.get('linkVerified', False) else None
             cards.append(f'<a href="{esc(url)}">{card}</a>' if url else card)

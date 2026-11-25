@@ -50,3 +50,7 @@ Relatórios de teste/preview em `VALIDATION.md`; matriz honesta de aderência e 
 ## Continuação V1.1
 
 Estado inicial limpo em `04d0303`. Nova fotografia pública obtida sem cache, hash diferente confirmado, máscara/contraste e ASCII atualizados para 132×79, com enquadramento preservado. Produto retirado removido das áreas ativas e assets exclusivos; identificação e card institucional da empresa preservados. Cinco produtos na composição 2 + 3 solicitada, variantes mobile específicas e fallbacks estáticos. Trinta testes Python e doze capturas Dark/Light aprovados. Proveniência, detalhes, limitações e evidências atuais em `REFINEMENT_V1_1.md`, `portrait-source.json` e `VALIDATION.md`. Main permanece no HEAD original.
+
+## Continuação V1.2
+
+Estado inicial limpo em `b09c7eb`. Hero redesenhado sem retrato, container ou animações ASCII; gerador/arquivo de caracteres/manifesto exclusivo removidos após auditoria dos arquivos compartilhados. Fotografia lateral preservada. Renderer original ETHAN consultado em leitura e exportado em ambiente separado, sem source privado no perfil. Card ETHAN passa a selecionar WebP, GIF de fallback e PNG reduzido; outros cards/atividade/stack/conexões gerados permanecem idênticos. Trinta e dois testes Python, doze capturas e testes de animação/fallback aprovados. Detalhes em `REFINEMENT_V1_2.md` e `ethan-export.json`; evidências atuais em `outputs/v1.2/` da entrega local. Fonte ETHAN e suas alterações pré-existentes preservadas. Captura específica do ETHAN Desktop ainda não recebida.

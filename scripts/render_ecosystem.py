@@ -15,19 +15,6 @@ def cube(x, y, s, svg):
             + path(f'M{x+s} {y+s*1.5}l{-s} {-s*.5}v{-s}l{s} {s*.5}z',svg.c['goldDeep'],'none','opacity=".16"'))
 
 
-def neural(svg):
-    cx,cy,r = 116,66,45
-    out = [f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="url(#sphere)" stroke="{svg.c["goldDeep"]}"/>']
-    for rotation in (-58,-25,12,47):
-        out.append(f'<ellipse cx="{cx}" cy="{cy}" rx="{r}" ry="16" fill="none" stroke="{svg.c["gold"]}" stroke-opacity=".45" transform="rotate({rotation} {cx} {cy})"/>')
-    nodes = [(cx+r*math.cos(i*math.tau/13)*(.65 if i%3==0 else 1),cy+r*math.sin(i*math.tau/13)*(.65 if i%3==0 else .9)) for i in range(13)]
-    for i,(x,y) in enumerate(nodes):
-        nx,ny = nodes[(i+4)%len(nodes)]
-        out.append(svg.line(x,y,nx,ny,'gold',.6,'opacity=".25"'))
-        out.append(f'<circle class="node" cx="{num(x)}" cy="{num(y)}" r="2" fill="{svg.c["goldLight"]}" style="animation-delay:{num(-i*.23)}s"/>')
-    return ''.join(out)
-
-
 def financial(svg):
     out = [svg.line(27,y,205,y,'border',.7) for y in (38,62,86,110)]
     d = 'M28 100L48 92 65 97 82 73 102 79 121 58 138 63 156 43 176 49 201 25'
@@ -67,7 +54,7 @@ def vault(svg):
     return ''.join(out)
 
 
-GRAPHICS = {'neural':neural,'financial':financial,'agents':agents,'knowledge':knowledge,'vault':vault}
+GRAPHICS = {'financial':financial,'agents':agents,'knowledge':knowledge,'vault':vault}
 
 
 def product(theme, project, *, featured=False, mobile=False):
@@ -98,7 +85,8 @@ def product(theme, project, *, featured=False, mobile=False):
         '.node{animation:node 3.8s ease-in-out infinite}@keyframes node{50%{opacity:.45}}'
         '.trace{stroke-width:1.7;stroke-dasharray:280;animation:trace 2.8s ease both}@keyframes trace{from{stroke-dashoffset:280}to{stroke-dashoffset:0}}'
         '.dial{transform-origin:109px 73px;animation:dial 12s ease-in-out infinite}@keyframes dial{40%,70%{transform:rotate(72deg)}}')
-    svg.add(f'<g aria-hidden="true" transform="translate({num(gx)} {num(gy)}) scale({num(scale)})">'+GRAPHICS[project['graphic']](svg)+'</g>')
+    graphic = '' if project.get('media') == 'original-render' else GRAPHICS[project['graphic']](svg)
+    svg.add(f'<g aria-hidden="true" transform="translate({num(gx)} {num(gy)}) scale({num(scale)})">'+graphic+'</g>')
     svg.add(svg.line(inset,divider,width-inset,divider,'border',.7))
     svg.add(svg.text(inset,title_y,project['name'],title_size,weight=600,spacing=.3))
     for i,line in enumerate(wrap(project['description'],width-inset*2,description_size)):
@@ -127,6 +115,13 @@ def render():
                 continue
             if not re.fullmatch(r'[a-z][a-z0-9-]*',p['id']):
                 raise ValueError('Invalid project id')
+            if p.get('media') == 'original-render':
+                for suffix in ('', '-mobile'):
+                    for extension in ('.webp', '.gif', '-static.png'):
+                        path = GENERATED / theme / ('project-' + p['id'] + suffix + extension)
+                        if not path.is_file():
+                            raise FileNotFoundError(f'Missing pre-rendered public visual asset: {path.name}')
+                continue
             for mobile in (False, True):
                 name = 'project-'+p['id'] + ('-mobile' if mobile else '')
                 product(theme,p,featured=p['id'] in featured,mobile=mobile).save(name)

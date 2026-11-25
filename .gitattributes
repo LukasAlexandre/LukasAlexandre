@@ -2,4 +2,3 @@
 *.woff2 -text
 *.jpg -text
 *.png -text
-assets/portrait/portrait.txt whitespace=-blank-at-eol

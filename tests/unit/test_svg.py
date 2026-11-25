@@ -7,7 +7,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from common import Svg, esc, safe_url, TOKENS, text_width
-from render_hero import desktop, mobile, portrait_lines
+from render_hero import desktop, mobile
 from common import load_json
 
 
@@ -38,15 +38,15 @@ class SvgTests(unittest.TestCase):
             return s.render()
         self.assertEqual(render(), render())
 
-    def test_portrait_is_real_character_grid(self):
-        lines = portrait_lines()
-        self.assertGreater(len(lines), 60)
-        self.assertEqual({len(x) for x in lines}, {load_json('config/profile.json')['portrait']['columns']})
-        self.assertGreater(len(set(''.join(lines))), 5)
+    def test_hero_is_compact_and_portrait_free(self):
         for variant in (desktop, mobile):
             svg = variant('dark', load_json('config/profile.json')).render()
             tree = ET.fromstring(svg)
             self.assertFalse(tree.findall('.//{*}image'))
+            self.assertNotIn('ASCII', svg)
+            self.assertNotIn('portrait', svg.lower())
+            self.assertNotIn('class="mono row"', svg)
+            self.assertLess(float(tree.get('viewBox').split()[-1]), 420)
             self.assertIn('prefers-reduced-motion', svg)
 
     def test_palette_text_contrast(self):

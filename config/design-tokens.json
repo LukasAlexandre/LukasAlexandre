@@ -70,7 +70,6 @@
     "easing": "cubic-bezier(.2,.7,.2,1)",
     "enter": 0.7,
     "stagger": 0.08,
-    "portraitRow": 0.026,
     "typeChar": 0.022,
     "sheenPeriod": 9
   },
@@ -83,5 +82,9 @@
     "mobileFeaturedHeight": 204,
     "mobileCardWidth": 116,
     "mobileCardHeight": 180
+  },
+  "hero": {
+    "desktopPanelHeight": 278,
+    "mobilePanelHeight": 380
   }
 }

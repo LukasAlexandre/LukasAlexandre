@@ -1,6 +1,6 @@
 # Assets, autoria e licenciamento
 
-Auditoria em 2026-11-25. Nenhum código ou geometria foi copiado do repositório de referência visual. Os cinco gráficos dos produtos, o desenho de cofre, os cubos, as linhas financeiras, o grafo, a esfera neural, os elementos de interface e os monogramas `in`/`LK` foram desenhados nesta implementação. Os ícones genéricos e C# já recuperados de `scripts/icons.py` também são geometria autoral.
+Auditoria em 2026-11-25. Nenhum código ou geometria foi copiado do repositório de referência externo. Os quatro gráficos SVG dos produtos, o cofre, cubos, linha financeira, grafo, elementos de interface e monogramas `in`/`LK` foram desenhados nesta implementação. A antiga esfera genérica foi removida na V1.2: ETHAN agora utiliza frames exportados do renderer visual original, conforme autorização do proprietário, sem incluir seu código-fonte privado no perfil. Os ícones genéricos e C# recuperados de `scripts/icons.py` são geometria autoral.
 
 ## Fontes recuperadas
 
@@ -32,7 +32,7 @@ Git Logo por **Jason Long**, disponibilizado pelo projeto Git sob [Creative Comm
 
 ## Retrato
 
-`assets/portrait/source.jpg` foi atualizada na V1.1 a partir do avatar público de LukasAlexandre. Requisições sem cache com tamanhos 2048 e 4096 retornaram os mesmos bytes e resolução 460×460. URL, data, hash atual e hash anterior estão em `docs/portrait-source.json`. A imagem foi convertida em caracteres reais com o pipeline recuperado, agora ajustado para preservar a mão, corrente e enquadramento completo. Não é uma imagem gerada por IA. A fotografia não recebe uma licença inventada.
+`assets/portrait/source.jpg` foi atualizada na V1.1 a partir do avatar público de LukasAlexandre. Requisições sem cache com tamanhos 2048 e 4096 retornaram os mesmos bytes e resolução 460×460. URL, data e hash estão em `docs/portrait-source.json`. Na V1.2 a fotografia é usada apenas na sidebar; a função ASCII foi removida. Não é uma imagem gerada por IA. A fotografia não recebe uma licença inventada.
 
 ## Limitações verificáveis
 
