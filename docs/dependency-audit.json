@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-11-25T04:24:22.921Z",
+  "endpoint": "https://api.osv.dev/v1/querybatch",
+  "packages": [
+    {
+      "package": {
+        "name": "fonttools",
+        "ecosystem": "PyPI"
+      },
+      "version": "4.68.0"
+    },
+    {
+      "package": {
+        "name": "brotli",
+        "ecosystem": "PyPI"
+      },
+      "version": "1.2.1"
+    },
+    {
+      "package": {
+        "name": "Pillow",
+        "ecosystem": "PyPI"
+      },
+      "version": "13.0.0"
+    },
+    {
+      "package": {
+        "name": "numpy",
+        "ecosystem": "PyPI"
+      },
+      "version": "2.5.5"
+    },
+    {
+      "package": {
+        "name": "opencv-python-headless",
+        "ecosystem": "PyPI"
+      },
+      "version": "5.1.0.95"
+    }
+  ],
+  "response": {
+    "results": [
+      {},
+      {},
+      {},
+      {},
+      {}
+    ]
+  }
+}

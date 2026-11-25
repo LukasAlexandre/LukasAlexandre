@@ -1,0 +1,62 @@
+{
+  "projects": [
+    {
+      "id": "ethan",
+      "name": "ETHAN",
+      "description": "Artificial Intelligence Ecosystem.",
+      "graphic": "original-render",
+      "public": true,
+      "url": null,
+      "media": "original-render"
+    },
+    {
+      "id": "vorcen",
+      "name": "VORCEN",
+      "description": "Financial Intelligence Platform.",
+      "graphic": "financial",
+      "public": true,
+      "url": null
+    },
+    {
+      "id": "gidace",
+      "name": "GIDACE",
+      "description": "Agent-Oriented Development Methodology.",
+      "graphic": "agents",
+      "public": true,
+      "url": null
+    },
+    {
+      "id": "inoryx",
+      "name": "INORYX",
+      "description": "Knowledge Intelligence System.",
+      "graphic": "knowledge",
+      "public": true,
+      "url": null
+    },
+    {
+      "id": "vaultify",
+      "name": "Vaultify",
+      "description": "Software Product.",
+      "graphic": "vault",
+      "public": true,
+      "url": null
+    }
+  ],
+  "layout": {
+    "rows": [
+      [
+        "ethan",
+        "vorcen"
+      ],
+      [
+        "gidace",
+        "inoryx",
+        "vaultify"
+      ]
+    ],
+    "featured": [
+      "ethan",
+      "vorcen"
+    ]
+  }
+}

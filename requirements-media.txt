@@ -1,0 +1,2 @@
+# Optional offline media encoding/quality analysis, never required by the daily job.
+Pillow==13.0.0

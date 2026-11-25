@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-11-25T04:27:58.968Z",
+  "source": "https://github.com/LukasAlexandre",
+  "api": "https://api.github.com/users/LukasAlexandre",
+  "name": "Lukas Alexandre Rosa",
+  "location": "Itapeva - MG",
+  "followers": 4,
+  "following": 3,
+  "publicRepositories": 23,
+  "avatarUrl": "https://avatars.githubusercontent.com/u/100711785?v=4",
+  "existingAvatarSHA256Matches": true,
+  "achievements": [
+    {
+      "alt": "Achievement: Pair Extraordinaire",
+      "src": "https://github.githubassets.com/assets/pair-extraordinaire-bronze-797214f41e7e.png",
+      "file": "preview/achievements/pair-extraordinaire.png"
+    },
+    {
+      "alt": "Achievement: Quickdraw",
+      "src": "https://github.githubassets.com/assets/quickdraw-default--light-8f798b35341a.png",
+      "file": "preview/achievements/quickdraw.png"
+    },
+    {
+      "alt": "Achievement: Pull Shark",
+      "src": "https://github.githubassets.com/assets/pull-shark-silver-0643f87ac9fd.png",
+      "file": "preview/achievements/pull-shark.png"
+    },
+    {
+      "alt": "Achievement: YOLO",
+      "src": "https://github.githubassets.com/assets/yolo-default-be0bbff04951.png",
+      "file": "preview/achievements/yolo.png"
+    }
+  ],
+  "avatarCheckedAt": "2026-11-25T04:52:42.275Z",
+  "avatarSHA256": "aa5eac639ae81221dbe1d8b9037b22bf5d40752a9e8bc7862e8b7e32c127c630"
+}
