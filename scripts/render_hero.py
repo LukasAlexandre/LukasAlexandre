@@ -20,7 +20,13 @@ def portrait(svg: Svg, x: float, y: float, w: float, h: float) -> None:
     lines = portrait_lines()
     cols, rows = len(lines[0]), len(lines)
     pad = 5
-    cell_w, cell_h = (w - pad * 2) / cols, (h - pad * 2) / rows
+    cfg = load_json("config/profile.json")["portrait"]
+    left, top, right, bottom = cfg["crop"]
+    aspect = (right - left) / (bottom - top)
+    grid_w = min(w - pad * 2, (h - pad * 2) * aspect)
+    grid_h = grid_w / aspect
+    grid_x, grid_y = x + (w - grid_w) / 2, y + (h - grid_h) / 2
+    cell_w, cell_h = grid_w / cols, grid_h / rows
     size = cell_h * 1.08
     step = MOTION["portraitRow"]
 
@@ -46,11 +52,11 @@ def portrait(svg: Svg, x: float, y: float, w: float, h: float) -> None:
         svg.use_font(line, 700, "mono")
         body = "".join(f'<tspan class="{tone}">{esc(chunk)}</tspan>' for tone, chunk in spans)
         out.append(
-            f'<text class="mono row" xml:space="preserve" x="{num(x + pad)}" y="{num(y + pad + (r + .82) * cell_h)}" '
+            f'<text class="mono row" xml:space="preserve" x="{num(grid_x)}" y="{num(grid_y + (r + .82) * cell_h)}" '
             f'font-size="{num(size)}" font-weight="700" textLength="{num(cols * cell_w)}" lengthAdjust="spacingAndGlyphs" '
             f'style="animation-delay:{num(r * step)}s;white-space:pre">{body}</text>'
         )
-    out.append(svg.rect(x + w - pad - 8, y + pad, 5, cell_h * 1.6, 0, "goldLight", extra='class="cur"'))
+    out.append(svg.rect(grid_x + grid_w - 8, grid_y, 5, cell_h * 1.6, 0, "goldLight", extra='class="cur"'))
     out.append("</g>")
     svg.add("".join(out))
 

@@ -42,7 +42,7 @@ const sizes = [[1920,1080],[1440,900],[1280,720],[768,1024],[390,844],[375,812]]
         return {
           pageWidth:document.documentElement.scrollWidth,viewport:innerWidth,
           articleWidth:box.width,articleScrollWidth:article.scrollWidth,
-          images:[...article.querySelectorAll('img')].map(img=>({src:new URL(img.currentSrc).pathname,alt:img.alt,width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height,naturalWidth:img.naturalWidth,complete:img.complete})),
+          images:[...article.querySelectorAll('img')].map(img=>({src:new URL(img.currentSrc).pathname,alt:img.alt,left:img.getBoundingClientRect().left,top:img.getBoundingClientRect().top,width:img.getBoundingClientRect().width,height:img.getBoundingClientRect().height,naturalWidth:img.naturalWidth,complete:img.complete})),
           theme:document.documentElement.dataset.colorMode,
           transferredBytes:performance.getEntriesByType('resource').reduce((sum,item)=>sum+item.transferSize,0),
           domContentLoadedMs:performance.getEntriesByType('navigation')[0].domContentLoadedEventEnd,
@@ -54,6 +54,8 @@ const sizes = [[1920,1080],[1440,900],[1280,720],[768,1024],[390,844],[375,812]]
       if(layout.articleScrollWidth>Math.ceil(layout.articleWidth)+1) report.failures.push(`${theme}/${width}: README overflow`);
       if(layout.images.some(img=>!img.complete || !img.naturalWidth || !img.alt)) report.failures.push(`${theme}/${width}: broken or inaccessible image`);
       if(layout.images.some(img=>!img.src.includes(`/generated/${theme}/`))) report.failures.push(`${theme}/${width}: mismatched asset theme`);
+      const projects=layout.images.filter(img=>img.src.includes('/project-'));
+      if(projects.length!==5 || Math.abs(projects[0].top-projects[1].top)>1 || projects.slice(2).some(img=>Math.abs(img.top-projects[2].top)>1) || projects[0].width<projects[2].width*1.45) report.failures.push(`${theme}/${width}: Bento row structure or featured emphasis mismatch`);
       if(errors.length) report.failures.push(...errors);
       report.results.push({theme,width,height,filename,...layout,errors});
       await context.close();

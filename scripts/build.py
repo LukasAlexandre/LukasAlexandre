@@ -28,19 +28,25 @@ def readme() -> str:
     sections = [picture("hero", profile["name"] + " — Product & Software Engineering. ASCII portrait, professional identity and engineering mission.", mobile=True),
                 picture("activity", "Development Activity: real contribution totals, active days, current and longest streaks, last twelve months heatmap and monthly bars.", mobile=True),
                 picture("ecosystem-header", "Engineering Ecosystem", mobile=True)]
-    projects = load_json("config/projects.json")
-    if isinstance(projects, dict):
-        projects = projects["projects"]
-    cards = []
-    for project in projects:
-        if project.get("public") is not True:
+    config = load_json("config/projects.json")
+    projects = config['projects'] if isinstance(config, dict) else config
+    public = {p['id']: p for p in projects if p.get('public') is True}
+    rows = config.get('layout', {}).get('rows') if isinstance(config, dict) else None
+    if rows is None:
+        ids = list(public)
+        rows = [ids[i:i+2] for i in range(0, len(ids), 2)]
+    for row in rows:
+        visible = [public[key] for key in row if key in public]
+        if not visible:
             continue
-        card = picture("project-" + project["id"], project.get("name", project.get("title", project["id"])) + " — " + project.get("description", ""), "49%")
-        # Links require an explicit verified marker, not merely an address.
-        url = safe_url(project.get("url")) if project.get("linkVerified", False) else None
-        cards.append(f'<a href="{esc(url)}">{card}</a>' if url else card)
-    for i in range(0, len(cards), 2):
-        sections.append('<p>' + '\n'.join(cards[i:i + 2]) + '</p>')
+        width = '49%' if len(visible) == 2 else ('32%' if len(visible) == 3 else '100%')
+        cards = []
+        for project in visible:
+            card = picture('project-' + project['id'], project['name'] + ' — ' + project.get('description', ''), width, mobile=True)
+            # Links require an explicit verified marker, not merely an address.
+            url = safe_url(project.get('url')) if project.get('linkVerified', False) else None
+            cards.append(f'<a href="{esc(url)}">{card}</a>' if url else card)
+        sections.append('<p>' + '\n'.join(cards) + '</p>')
     sections += [picture("stack", "Technology Stack: TypeScript, JavaScript, Python, C#, React, HTML, CSS, Node.js, FastAPI, MySQL, PostgreSQL, Artificial Intelligence, Git, GitHub and Docker.", mobile=True),
                  picture("connections-header", "Professional Connections", mobile=True)]
     connections = []

@@ -12,7 +12,9 @@ python -m venv .venv
 
 Para atualizar a coleta pública: `python scripts/build.py --refresh`. A execução normal é offline e determinística para o mesmo cache e configuração. O coletor não consulta nomes de repositórios privados. Detalhes do intervalo e das métricas em `DATA_SOURCES.md`.
 
-Para converter novamente a fotografia real: instale `requirements-portrait.txt`, depois execute `python scripts/generate_ascii.py --columns 112`. Esse pipeline usa OpenCV, NumPy e Pillow somente localmente. O workflow diário utiliza o ASCII já versionado.
+Para converter novamente a fotografia real: instale `requirements-portrait.txt`, depois execute `python scripts/generate_ascii.py --columns 132`. Esse pipeline usa OpenCV, NumPy e Pillow somente localmente. O workflow diário utiliza o ASCII já versionado. Na V1.1, o retrato preserva a proporção quadrada completa da fotografia; máscara, piso de iluminação, contraste e redução do brilho corporal estão em `config/profile.json`. Espaços finais no ASCII são intencionais para preservar as 132 colunas.
+
+O Bento Grid V1.1 usa `layout.rows` e `layout.featured` em `config/projects.json`: ETHAN/VORCEN na primeira linha, GIDACE/INORYX/Vaultify na segunda. As dimensões estão nos tokens `ecosystem`; cada card tem variantes desktop/mobile e estáticas. `render_ecosystem.py` remove somente SVGs `project-*.svg` obsoletos dentro de `generated/{theme}`, evitando assets exclusivos de cards removidos. Histórico anterior permanece preservado no Git.
 
 As cores, famílias tipográficas, medidas e parâmetros de movimento estão em `config/design-tokens.json`. Identidade e conexões estão em `config/profile.json`; produtos públicos em `config/projects.json`. Uma URL só é vinculada pelo README quando estiver explicitamente marcada como verificada. SVGs são auto-contidos, sem scripts, raster interno, fontes externas ou eventos. A fotografia aparece somente na coluna lateral da preview; o hero usa caracteres vetoriais reais.
 

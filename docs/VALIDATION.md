@@ -34,7 +34,7 @@ O harness captura screenshots completas em dark e light em 1920×1080, 1440×900
 - Nenhuma publicação, GitHub Camo ou execução remota foi realizada. O comportamento na plataforma real ainda precisa de homologação depois de autorização para publicar.
 - O shell é uma aproximação local do GitHub, não uma cópia integral de seus serviços. Não há busca, follow ou navegação de repositórios funcionais nessa preview.
 
-## Resultado final — 2026-11-25
+## Resultado V1 — histórico de 2026-11-25
 
 - **26 testes Python aprovados**: integridade de calendário, dois anos da fonte pública, cache atômico, erro de gravação, fallback, dados vazios, métricas, leap year, XML/Unicode/injeção, visibilidade explícita, todas as fontes de picture existentes, contraste e determinismo de fontes.
 - **88 SVGs**: 44 versões padrão + 44 alternativas estáticas, ambos os temas, XML válido e sem script, foreignObject, imagens raster internas ou referências externas ativas.
@@ -51,3 +51,17 @@ O harness captura screenshots completas em dark e light em 1920×1080, 1440×900
 Ferramentas: Python 3.12, Playwright 1.62.1, Chromium 151 e pngjs 7.0.0. Para instalar somente as ferramentas de evidência: `npm ci`, depois `npx playwright install chromium`; iniciar a preview antes de executar os scripts de teste. Elas não são dependências do README nem do workflow diário.
 
 As evidências estão no diretório `screenshots/` da entrega local; relatórios JSON permitem conferir cada viewport e a seleção real dos arquivos. A captura completa foi refeita após os ajustes de espaço do activity, linha financeira, fontes estáticas e inclusão de achievements públicos verificados.
+
+## Resultado V1.1 — refinamento de identidade e ecossistema
+
+- **30 testes Python aprovados**; quatro novos contratos cobrem fotografia atual/hash, ausência do card removido com preservação da empresa, ordem 2 + 3 e encaixe de textos nas variantes dos cinco produtos.
+- **104 SVGs** válidos, com geração determinística confirmada. Retrato real de 132×79 caracteres, proporção preservada e fotografia lateral atualizada.
+- **12 screenshots completas aprovadas**, dark/light em 1920×1080, 1440×900, 1280×720, 768×1024, 390×844 e 375×812. Quinze imagens do README por captura; zero falhas de decodificação, tema, HTTP/JavaScript ou overflow. As coordenadas medidas também confirmam dois cards na primeira linha, três na segunda e destaque maior nos dois primeiros.
+- **52 verificações de SVG direto aprovadas** (um tema, todas as versões padrão/estáticas); ambos os temas foram validados no contexto de imagem em todas as resoluções.
+- Comparação real de frames, picture/img: hero **96.217**, activity **86.528**, VORCEN **21.037** pixels alterados. As respectivas alternativas estáticas têm **zero** pixels alterados com movimento reduzido. Seleção estática aprovada nos dois temas, em desktop/mobile.
+- Inspeção visual das capturas Dark desktop, Dark 375 e Light 390 confirmou postura da nova fotografia, legibilidade e composição 2 + 3 sem placeholders.
+- Nenhuma referência ao produto retirado nas áreas ativas de configuração, scripts, README, preview ou SVGs. Registros históricos e strings de testes de regressão são mantidos intencionalmente.
+- `pip check` e `git diff --check` aprovados; espaços finais do ASCII são colunas intencionais, configurados em `.gitattributes`.
+- Preview reiniciada em loopback na porta 8765 e resposta HTTP 200 verificada. Evidências atuais em `outputs/v1.1/screenshots/` da entrega; fontes e comportamento seguem os mesmos contratos da V1. Nenhum teste ou publicação remota foi realizado.
+
+Detalhes e proveniência em `REFINEMENT_V1_1.md` e `portrait-source.json`. Os resultados V1 acima permanecem como histórico, sem substituir as medições atuais.

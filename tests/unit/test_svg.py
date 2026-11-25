@@ -41,7 +41,7 @@ class SvgTests(unittest.TestCase):
     def test_portrait_is_real_character_grid(self):
         lines = portrait_lines()
         self.assertGreater(len(lines), 60)
-        self.assertEqual({len(x) for x in lines}, {112})
+        self.assertEqual({len(x) for x in lines}, {load_json('config/profile.json')['portrait']['columns']})
         self.assertGreater(len(set(''.join(lines))), 5)
         for variant in (desktop, mobile):
             svg = variant('dark', load_json('config/profile.json')).render()

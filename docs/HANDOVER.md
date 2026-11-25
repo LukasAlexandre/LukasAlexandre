@@ -46,3 +46,7 @@ O único anexo desta conversa é o handover textual. O concept não foi localiza
 - Avatar atual da API pública GitHub comparado por SHA-256: corresponde à fotografia recuperada. Fonte exata e dados laterais públicos registrados em `profile-public.json`.
 
 Relatórios de teste/preview em `VALIDATION.md`; matriz honesta de aderência e pendências em `CONCEPT_ADHERENCE.md`. Branch permanece a original dedicada. Não houve alteração de main, publicação ou execução remota.
+
+## Continuação V1.1
+
+Estado inicial limpo em `04d0303`. Nova fotografia pública obtida sem cache, hash diferente confirmado, máscara/contraste e ASCII atualizados para 132×79, com enquadramento preservado. Produto retirado removido das áreas ativas e assets exclusivos; identificação e card institucional da empresa preservados. Cinco produtos na composição 2 + 3 solicitada, variantes mobile específicas e fallbacks estáticos. Trinta testes Python e doze capturas Dark/Light aprovados. Proveniência, detalhes, limitações e evidências atuais em `REFINEMENT_V1_1.md`, `portrait-source.json` e `VALIDATION.md`. Main permanece no HEAD original.

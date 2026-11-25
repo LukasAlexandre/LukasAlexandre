@@ -77,7 +77,9 @@ def build_ascii(image: Image.Image, cfg: dict, columns: int | None = None) -> li
     # Dim the clothing so the face stays the focal point.
     y = np.linspace(0, 1, tone.shape[0], dtype=np.float32)[:, None]
     tone *= 1 - cfg["bodyDim"] * np.clip((y - cfg["bodyStart"]) / 0.08, 0, 1)
-    tone *= 1 - 0.55 * np.clip((y - 0.88) / 0.12, 0, 1)
+    tone *= 1 - cfg.get("bodyFade", 0.55) * np.clip((y - 0.88) / 0.12, 0, 1)
+    floor = cfg.get("foregroundFloor", 0)
+    tone = floor + (1 - floor) * tone
 
     rows = round(cols * (crop.height / crop.width) * cfg["cellAspect"] / cfg["lineHeight"])
     small = cv2.resize(tone.astype(np.float32), (cols, rows), interpolation=cv2.INTER_AREA)

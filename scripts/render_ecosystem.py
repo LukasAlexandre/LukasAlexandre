@@ -2,7 +2,7 @@
 from __future__ import annotations
 import math
 import re
-from common import LAYOUT, THEMES, Svg, load_json, num, wrap
+from common import GENERATED, LAYOUT, THEMES, TOKENS, Svg, load_json, num, wrap
 
 
 def path(d, fill="none", stroke="url(#gold)", extra=""):
@@ -13,16 +13,6 @@ def cube(x, y, s, svg):
     return (path(f'M{x} {y}l{s} {-s*.5} {s} {s*.5}-{s} {s*.5}z', 'url(#surface)')
             + path(f'M{x} {y}v{s}l{s} {s*.5} {s} {-s*.5}v{-s}M{x+s} {y+s*.5}v{s}', stroke=svg.c['gold'])
             + path(f'M{x+s} {y+s*1.5}l{-s} {-s*.5}v{-s}l{s} {s*.5}z',svg.c['goldDeep'],'none','opacity=".16"'))
-
-
-def layers(svg):
-    out = []
-    for i in range(4):
-        y = 79-i*15
-        body = (path(f'M54 {y}l62-27 62 27-62 27z','url(#surface)',svg.c['gold'],f'opacity="{num(.42+i*.17)}"')
-                + path(f'M54 {y}v5l62 27 62-27v-5',stroke=svg.c['borderStrong']))
-        out.append(f'<g class="float" style="animation-delay:{num(-i*.6)}s">{body}</g>')
-    return ''.join(out)
 
 
 def neural(svg):
@@ -77,24 +67,43 @@ def vault(svg):
     return ''.join(out)
 
 
-GRAPHICS = {'layers':layers,'neural':neural,'financial':financial,'agents':agents,'knowledge':knowledge,'vault':vault}
+GRAPHICS = {'neural':neural,'financial':financial,'agents':agents,'knowledge':knowledge,'vault':vault}
 
 
-def product(theme, project):
-    svg = Svg(232,222,theme,project['name'],project['description'])
-    svg.add(svg.panel(0,0,232,222,9))
+def product(theme, project, *, featured=False, mobile=False):
+    layout = TOKENS['ecosystem']
+    prefix = ('mobileFeatured' if featured else 'mobileCard') if mobile else ('featured' if featured else 'card')
+    width, height = layout[prefix + 'Width'], layout[prefix + 'Height']
+    if mobile and not featured:
+        inset, divider, title_y, description_y = 9, 81, 102, 121
+        title_size, description_size, pitch = 13, 10.5, 14
+        scale, gx, gy = .48, 2.3, 6
+    elif mobile:
+        inset, divider, title_y, description_y = 12, 108, 133, 155
+        title_size, description_size, pitch = 18, 11.5, 15
+        scale, gx, gy = .72, 3.5, 8
+    elif featured:
+        inset, divider, title_y, description_y = 20, 154, 184, 209
+        title_size, description_size, pitch = 23, 13, 17
+        scale, gx, gy = 1.25, 31, -5
+    else:
+        inset, divider, title_y, description_y = 17, 132, 158, 180
+        title_size, description_size, pitch = 19, 12, 16
+        scale, gx, gy = 1, 0, 0
+    svg = Svg(width,height,theme,project['name'],project['description'])
+    svg.add(svg.panel(0,0,width,height,9))
     svg.defs.append(f'<radialGradient id="sphere"><stop offset="0" stop-color="{svg.c["gold"]}" stop-opacity=".16"/><stop offset="1" stop-color="{svg.c["surface"]}" stop-opacity="0"/></radialGradient>'
         f'<linearGradient id="chart-area" x1="0" y1="0" x2="0" y2="1"><stop stop-color="{svg.c["gold"]}" stop-opacity=".22"/><stop offset="1" stop-color="{svg.c["gold"]}" stop-opacity="0"/></linearGradient>')
     svg.css.append('.float{animation:float 5s ease-in-out infinite}@keyframes float{50%{transform:translateY(-4px)}}'
         '.node{animation:node 3.8s ease-in-out infinite}@keyframes node{50%{opacity:.45}}'
         '.trace{stroke-width:1.7;stroke-dasharray:280;animation:trace 2.8s ease both}@keyframes trace{from{stroke-dashoffset:280}to{stroke-dashoffset:0}}'
         '.dial{transform-origin:109px 73px;animation:dial 12s ease-in-out infinite}@keyframes dial{40%,70%{transform:rotate(72deg)}}')
-    svg.add('<g aria-hidden="true">'+GRAPHICS[project['graphic']](svg)+'</g>')
-    svg.add(svg.line(17,132,215,132,'border',.7))
-    svg.add(svg.text(17,158,project['name'],19,weight=600,spacing=.3))
-    for i,line in enumerate(wrap(project['description'],198,12)):
-        svg.add(svg.text(17,180+i*16,line,12,fill='textSoft'))
-    svg.add(svg.sheen(1,1,230,220,9,2.5))
+    svg.add(f'<g aria-hidden="true" transform="translate({num(gx)} {num(gy)}) scale({num(scale)})">'+GRAPHICS[project['graphic']](svg)+'</g>')
+    svg.add(svg.line(inset,divider,width-inset,divider,'border',.7))
+    svg.add(svg.text(inset,title_y,project['name'],title_size,weight=600,spacing=.3))
+    for i,line in enumerate(wrap(project['description'],width-inset*2,description_size)):
+        svg.add(svg.text(inset,description_y+i*pitch,line,description_size,fill='textSoft'))
+    svg.add(svg.sheen(1,1,width-2,height-2,9,2.5))
     return svg
 
 
@@ -106,8 +115,11 @@ def header(theme, mobile=False):
 
 
 def render():
-    projects = load_json('config/projects.json')['projects']
+    config = load_json('config/projects.json')
+    projects = config['projects']
+    featured = set(config.get('layout', {}).get('featured', []))
     for theme in THEMES:
+        expected = set()
         header(theme).save('ecosystem-header')
         header(theme,True).save('ecosystem-header-mobile')
         for p in projects:
@@ -115,7 +127,15 @@ def render():
                 continue
             if not re.fullmatch(r'[a-z][a-z0-9-]*',p['id']):
                 raise ValueError('Invalid project id')
-            product(theme,p).save('project-'+p['id'])
+            for mobile in (False, True):
+                name = 'project-'+p['id'] + ('-mobile' if mobile else '')
+                product(theme,p,featured=p['id'] in featured,mobile=mobile).save(name)
+                expected.update((name+'.svg', name+'-static.svg'))
+        # Only generated project artifacts are pruned; validated config IDs cannot
+        # escape this theme directory. Historical originals remain in Git.
+        for artifact in (GENERATED / theme).glob('project-*.svg'):
+            if artifact.name not in expected:
+                artifact.unlink()
 
 
 if __name__ == '__main__':
