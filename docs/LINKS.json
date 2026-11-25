@@ -1,0 +1,11 @@
+{
+  "checkedOn": "2026-11-25",
+  "method": "Node.js native fetch GET, redirect following enabled, no credentials",
+  "connections": [
+    {"id":"github","url":"https://github.com/LukasAlexandre","httpStatus":200,"verified":true},
+    {"id":"website","url":"https://lktechnologiesbrasil.com/","httpStatus":200,"verified":true},
+    {"id":"company","url":"https://lktechnologiesbrasil.com/","httpStatus":200,"verified":true},
+    {"id":"linkedin","url":"https://www.linkedin.com/in/lukas-alexandre-rosa/","httpStatus":999,"verified":false,"note":"URL preservada do perfil existente, mas o bloqueio automatizado impede validar conteúdo/disponibilidade."}
+  ],
+  "projects": "No project URL was supplied or independently verified. Cards remain unlinked."
+}

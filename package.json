@@ -1,0 +1,14 @@
+{
+  "name": "lkr-profile-visual-validation",
+  "private": true,
+  "description": "Local Playwright evidence tooling; not part of the GitHub README runtime",
+  "scripts": {
+    "test:visual": "node tests/visual/capture.cjs",
+    "test:motion": "node tests/visual/animation.cjs",
+    "test:reduced": "node tests/visual/reduced-selection.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "pngjs": "7.0.0"
+  }
+}

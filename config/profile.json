@@ -1,0 +1,195 @@
+{
+  "login": "LukasAlexandre",
+  "name": "Lukas Alexandre Rosa",
+  "role": "PRODUCT & SOFTWARE ENGINEERING",
+  "focusLine": [
+    "Software Architecture",
+    "Artificial Intelligence",
+    "Full Stack Development"
+  ],
+  "company": {
+    "prefix": "Co-Founder at ",
+    "name": "LK Technologies Brasil"
+  },
+  "brand": {
+    "mark": "LKR",
+    "label": "ENGINEERING INTELLIGENCE",
+    "status": "SYSTEM ONLINE"
+  },
+  "code": [
+    "const engineer = {",
+    "  name: \"Lukas Alexandre Rosa\",",
+    "  focus: [",
+    "    \"Software Engineering\",",
+    "    \"Artificial Intelligence\",",
+    "    \"Systems Architecture\"",
+    "  ],",
+    "  mission: \"Engineering intelligent systems.\"",
+    "};"
+  ],
+  "portrait": {
+    "source": "assets/portrait/source.jpg",
+    "output": "assets/portrait/portrait.txt",
+    "crop": [
+      98,
+      -8,
+      378,
+      342
+    ],
+    "columns": 112,
+    "cellAspect": 0.6,
+    "lineHeight": 1.0,
+    "ramp": " .-=+*#%@",
+    "gamma": 0.9,
+    "claheClip": 1.5,
+    "sharpen": 0.6,
+    "backgroundChar": ":",
+    "lineStrength": 0.95,
+    "bodyDim": 0.35,
+    "bodyStart": 0.84,
+    "silhouette": [
+      [
+        150,
+        62
+      ],
+      [
+        185,
+        22
+      ],
+      [
+        235,
+        8
+      ],
+      [
+        292,
+        18
+      ],
+      [
+        328,
+        55
+      ],
+      [
+        336,
+        100
+      ],
+      [
+        345,
+        135
+      ],
+      [
+        325,
+        200
+      ],
+      [
+        305,
+        250
+      ],
+      [
+        292,
+        268
+      ],
+      [
+        330,
+        288
+      ],
+      [
+        440,
+        312
+      ],
+      [
+        460,
+        400
+      ],
+      [
+        40,
+        400
+      ],
+      [
+        60,
+        335
+      ],
+      [
+        160,
+        272
+      ],
+      [
+        168,
+        235
+      ],
+      [
+        145,
+        195
+      ],
+      [
+        132,
+        150
+      ],
+      [
+        136,
+        100
+      ]
+    ],
+    "sureForeground": [
+      [
+        185,
+        95,
+        295,
+        225
+      ],
+      [
+        205,
+        250,
+        265,
+        300
+      ],
+      [
+        130,
+        330,
+        340,
+        345
+      ]
+    ]
+  },
+  "connections": [
+    {
+      "id": "linkedin",
+      "title": "LinkedIn",
+      "subtitle": "/lukas-alexandre-rosa",
+      "icon": "linkedin",
+      "url": "https://www.linkedin.com/in/lukas-alexandre-rosa/",
+      "width": 163,
+      "verified": false,
+      "verification": "Existing README URL; LinkedIn HTTP 999 blocks automated validation"
+    },
+    {
+      "id": "github",
+      "title": "GitHub",
+      "subtitle": "/LukasAlexandre",
+      "icon": "github",
+      "url": "https://github.com/LukasAlexandre",
+      "width": 159,
+      "verified": true,
+      "verification": "HTTP 200 on 2026-11-25"
+    },
+    {
+      "id": "website",
+      "title": "Website",
+      "subtitle": "lktechnologiesbrasil.com",
+      "icon": "globe",
+      "url": "https://lktechnologiesbrasil.com/",
+      "width": 180,
+      "verified": true,
+      "verification": "HTTP 200 on 2026-11-25"
+    },
+    {
+      "id": "company",
+      "title": "LK Technologies Brasil",
+      "subtitle": "Technology · Products · R&D",
+      "icon": "lk",
+      "url": "https://lktechnologiesbrasil.com/",
+      "width": 188,
+      "verified": true,
+      "verification": "HTTP 200 on 2026-11-25"
+    }
+  ]
+}

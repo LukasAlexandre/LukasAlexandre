@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.preview*.log
+.preview*.err
+preview/server*.log
+*.log
+node_modules/
+tests/visual/evidence/
+preview/readme.html
