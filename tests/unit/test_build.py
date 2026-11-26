@@ -15,6 +15,12 @@ from unittest.mock import patch
 
 
 class BuildTests(unittest.TestCase):
+    def test_connections_exclude_self_link_and_center_last_card(self):
+        markup = readme()
+        self.assertNotIn('connection-github', markup)
+        self.assertIn('<a href="https://www.linkedin.com/in/lukas-alexandre-rosa/">', markup)
+        self.assertRegex(markup, r'<p align="center">[^\n]*connection-company[^\n]*</p>')
+
     def test_all_picture_sources_exist(self):
         sources = re.findall(r'(?:src|srcset)="\./([^\"]+)"', readme())
         self.assertGreater(len(sources), 40)

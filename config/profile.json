@@ -39,16 +39,6 @@
       "verification": "URL explicitly confirmed by profile owner; automated validation blocked by LinkedIn HTTP 999"
     },
     {
-      "id": "github",
-      "title": "GitHub",
-      "subtitle": "/LukasAlexandre",
-      "icon": "github",
-      "url": "https://github.com/LukasAlexandre",
-      "width": 159,
-      "verified": true,
-      "verification": "HTTP 200 on 2026-11-25"
-    },
-    {
       "id": "website",
       "title": "Website",
       "subtitle": "lktechnologiesbrasil.com",
