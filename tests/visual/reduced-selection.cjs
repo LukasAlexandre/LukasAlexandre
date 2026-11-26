@@ -7,12 +7,12 @@ const output=path.resolve(process.argv[2]||'tests/visual/evidence');
   const results=[];
   try{
     for(const theme of ['dark','light'])for(const width of [375,1440]){
-      const context=await browser.newContext({viewport:{width,height:900},colorScheme:theme,reducedMotion:'reduce'});
+      const context=await browser.newContext({viewport:{width,height:900},colorScheme:theme==='dark'?'light':'dark',reducedMotion:'reduce'});
       const page=await context.newPage();
       await page.goto(`http://localhost:8765/preview/?theme=${theme}`,{waitUntil:'networkidle'});
       await page.waitForFunction(()=>window.previewReady);
       const assets=await page.locator('#readme img').evaluateAll(imgs=>imgs.map(img=>new URL(img.currentSrc).pathname));
-      results.push({theme,width,assets,passed:assets.length>0&&assets.every(src=>src.includes(`/generated/${theme}/`)&&/-static\.(svg|png)$/.test(src))&&assets.some(src=>src.endsWith(width<600?'/hero-mobile-static.svg':'/hero-static.svg'))});
+      results.push({theme,width,assets,passed:assets.length>0&&assets.every(src=>src.includes('/generated/adaptive/')&&/-static\.(svg|png)$/.test(src))&&assets.some(src=>src.endsWith(width<600?'/hero-mobile-static.svg':'/hero-static.svg'))});
       await context.close();
     }
   }finally{await browser.close();}

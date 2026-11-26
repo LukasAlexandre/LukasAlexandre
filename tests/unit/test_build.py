@@ -22,6 +22,20 @@ class BuildTests(unittest.TestCase):
             self.assertTrue((ROOT / source).is_file(), source)
         validate_generated()
 
+    def test_github_theme_rewrite_cannot_erase_viewport_or_motion(self):
+        for media in re.findall(r'<source media="([^"]+)"', readme()):
+            if 'prefers-color-scheme' in media:
+                self.assertNotIn('max-width', media)
+                self.assertNotIn('prefers-reduced-motion', media)
+
+    def test_adaptive_vector_geometry_and_theme_contract(self):
+        for source in (ROOT / 'generated/dark').glob('*.svg'):
+            adaptive = ET.parse(ROOT / 'generated/adaptive' / source.name).getroot()
+            original = ET.parse(source).getroot()
+            self.assertEqual(adaptive.get('viewBox'), original.get('viewBox'))
+            self.assertIn('@media(prefers-color-scheme:light)', ''.join(adaptive.itertext()))
+            self.assertFalse(any(n.tag.endswith('image') for n in adaptive.iter()))
+
     def test_only_explicitly_public_projects_are_exposed(self):
         original = load_json
         def configured(path):

@@ -17,8 +17,8 @@ function difference(a,b){
   const browser=await chromium.launch({headless:true});
   const results=[];
   try{
-    for(const reduced of [false,true]){
-      const context=await browser.newContext({viewport:{width:900,height:900},reducedMotion:reduced?'reduce':'no-preference'});
+    for(const width of [375,900])for(const reduced of [false,true]){
+      const context=await browser.newContext({viewport:{width,height:900},reducedMotion:reduced?'reduce':'no-preference'});
       const page=await context.newPage();
       for(const name of ['hero','activity','project-vorcen','project-ethan']){
         await page.goto('http://localhost:8765/preview/?theme=dark',{waitUntil:'networkidle'});
@@ -49,9 +49,9 @@ function difference(a,b){
         const second=await image.screenshot({animations:'allow'});
         const changedPixels=difference(first,second);
         const suffix=reduced?'reduced':'motion';
-        fs.writeFileSync(path.join(output,`${name}-${suffix}-early.png`),first);
-        fs.writeFileSync(path.join(output,`${name}-${suffix}-late.png`),second);
-        results.push({asset:name,reducedMotion:reduced,staticSelected,changedPixels,passed:reduced?changedPixels===0&&staticSelected:changedPixels>100&&!staticSelected});
+        fs.writeFileSync(path.join(output,`${name}-${width}-${suffix}-early.png`),first);
+        fs.writeFileSync(path.join(output,`${name}-${width}-${suffix}-late.png`),second);
+        results.push({width,asset:name,reducedMotion:reduced,staticSelected,changedPixels,passed:reduced?changedPixels===0&&staticSelected:changedPixels>100&&!staticSelected});
       }
       await context.close();
     }
