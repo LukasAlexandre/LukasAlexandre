@@ -35,8 +35,8 @@
       "icon": "linkedin",
       "url": "https://www.linkedin.com/in/lukas-alexandre-rosa/",
       "width": 163,
-      "verified": false,
-      "verification": "Existing README URL; LinkedIn HTTP 999 blocks automated validation"
+      "verified": true,
+      "verification": "URL explicitly confirmed by profile owner; automated validation blocked by LinkedIn HTTP 999"
     },
     {
       "id": "github",
